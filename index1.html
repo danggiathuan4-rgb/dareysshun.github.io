@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bảng điểm Pickleball</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9e4f5);
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .teams {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 30px;
+    }
+    .team {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+    .team-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .score {
+      font-size: 48px;
+      color: #0077cc;
+    }
+    .server-indicator {
+      margin-top: 10px;
+      font-size: 14px;
+      color: green;
+      font-weight: bold;
+    }
+    .controls {
+      margin-top: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bảng điểm Pickleball 🎾</h1>
+
+  <div class="teams">
+    <div class="team">
+      <div class="team-name" id="teamAName">Đội Xanh</div>
+      <div class="score" id="scoreA">0</div>
+      <div class="server-indicator" id="serverA">🔄 Đang giao bóng</div>
+    </div>
+    <div class="team">
+      <div class="team-name" id="teamBName">Đội Đỏ</div>
+      <div class="score" id="scoreB">0</div>
+      <div class="server-indicator" id="serverB" style="visibility: hidden;">🔄 Đang giao bóng</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="addPoint('A')">+1 điểm cho Đội Xanh</button>
+    <button onclick="addPoint('B')">+1 điểm cho Đội Đỏ</button>
+    <button onclick="switchServer()">Chuyển lượt giao bóng</button>
+  </div>
+
+  <script>
+    let scoreA = 0;
+    let scoreB = 0;
+    let server = 'A';
+
+    function updateDisplay() {
+      document.getElementById('scoreA').textContent = scoreA;
+      document.getElementById('scoreB').textContent = scoreB;
+      document.getElementById('serverA').style.visibility = server === 'A' ? 'visible' : 'hidden';
+      document.getElementById('serverB').style.visibility = server === 'B' ? 'visible' : 'hidden';
+    }
+
+    function addPoint(team) {
+      if (team === 'A') scoreA++;
+      else scoreB++;
+      updateDisplay();
+    }
+
+    function switchServer() {
+      server = server === 'A' ? 'B' : 'A';
+      updateDisplay();
+    }
+
+    updateDisplay();
+  </script>
+
+</body>
+</html>
